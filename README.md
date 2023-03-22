@@ -1,2 +1,3 @@
 # whitecliffe-python
-Originally I just erased my code after I was finished with practicing with it. 
+Originally I just erased my code after I was finished with practicing with it instead of saving it into a file..... 
+
