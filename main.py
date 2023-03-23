@@ -1,41 +1,38 @@
+class Ticket():
 
-print("Welcome!!!!")
+    open_tickets = 0
+    closed_tickets = 0
 
-def add_numbers(num1, num2):
-    print(num1 + num2)
+    @classmethod
+    def getOpenTickets(cls):
+        return Ticket.open_tickets
+    @classmethod
+    def getClosedTickets(cls):
+        return Ticket.closed_tickets
 
-add_numbers(5,2)
+    def __init__(self, staff_id, ticket_creator_name, contact_email, desc):
+        Ticket.open_tickets = Ticket.open_tickets + 1
+        self.staff_id = staff_id
+        self.ticket_creator_name = ticket_creator_name
+        self.contact_email = contact_email
+        self.desc = desc
+        self.desc = self.desc.lower()
+        self.solved = False
+        self.password = ""
+        if ((self.desc.find("password change") != -1) or (self.desc.find("passwordchange") != -1)):
+            Ticket.open_tickets -= 1
+            Ticket.closed_tickets += 1
+            self.solved = True
+            self.password = self.staff_id[:3] + self.ticket_creator_name[:3]
 
-def sub_numbers(num1, num2):
-    print(num1 - num2)
-sub_numbers(5,2)
+    def getStatus(self):
+        return self.solved
 
+test = Ticket("20230721", "Nathaniel", "Email", "password change")
+test1 = Ticket("20230721", "Nathaniel", "Email", "aaaa")
+test2 = Ticket("20230721", "Nathaniel", "Email", "aaaa")
+test3 = Ticket("20230721", "Nathaniel", "Email", "aaaa")
+test4 = Ticket("20230721", "Nathaniel", "Email", "aaaa")
 
-def name(first, last):
-    print(first, last)
-name ("John","Doe")
-
-def repeater(theString, num):
-    for i in range(num):
-        print(theString)
-x = int(input("Your value?"))
-y = str(input("Your string?"))
-repeater(y,x)
-
-def sum(list):
-    total = 0
-    for i in list:
-        total = total + i
-    print("The sum:", total)
-
-myList = [5,2,3,4]
-sum(myList)
-
-
-def multiply(list):
-    sum = 1
-    for i in list:
-        sum = sum * i
-    print("All of the numbers multiplied is ", sum)
-myList2 = [5,5,2,4]
-multiply(myList2)
+print(test.password)
+print(Ticket.getOpenTickets())
