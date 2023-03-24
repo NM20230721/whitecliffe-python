@@ -45,6 +45,7 @@ class Ticket():
             Ticket.closed_tickets += 1
             self.solved = True
             self.password = self.staff_id[:3] + self.ticket_creator_name[:3]
+            self.feedback = ("Password Changed to: " + self.password)
 
     def getStatus(self):
         print("-----Ticket Status-----")
@@ -55,6 +56,7 @@ class Ticket():
         print("Description:     ", self.desc)
         print("Response:        ", self.feedback)
         print("Ticket Status:   ", self.solved)
+        print("-----------------------")
 
 
 
@@ -64,20 +66,53 @@ class Ticket():
 
 ticketList = []
 
+def submitTicket():
+    while 1 == 1:
+        temp_object = Ticket(input("Input the Staff Id: "),
+                            input("Input the Ticket Creator Name: "),
+                            input("Input the Contact email: "),
+                            input("Input the Description of the Event: "))
+        ticketList.append(temp_object)
+        print("---------------")
+        check = input("Another Ticket? n for no, any for yes:  ")
+        if check == "n":
+            break
+
+def viewTickets():
+    for i in range(len(ticketList)):
+        print(ticketList[i].getStatus())
+        input("Input anything to continue")
+
+
+def addFeedback():
+    inputId = input("What was the ID of the ticket")
+    inputId = int(inputId)
+    newFeedback = input("Input an update to the ticket: ")
+    ticketList[inputId].feedback = newFeedback
+    if input("Would you like to close this ticket? y for yes").lower == "y":
+        ticketList[inputId].solved = True
+
+def openTicket():
+    inputId = input("What was the ID of the ticket")
+    inputId = int(inputId)
+    ticketList[inputId].solved = False
+    Ticket.open_tickets += 1
+    Ticket.closed_tickets -= 1
+
+allPaths = {"submit" : submitTicket(),
+            "respond" : addFeedback(),
+            "open" : openTicket(),
+            "view" : viewTickets,
+            "analytics" : Ticket.displayTicketStats()}
+
 while 1 == 1:
-    temp_object = Ticket(input("Input the Staff Id: "),
-                         input("Input the Ticket Creator Name: "),
-                         input("Input the Contact email: "),
-                         input("Input the Description of the Event: "))
-    ticketList.append(temp_object)
-    print("---------------")
-    check = input("Another Ticket? n for no, any for yes:  ")
-    if check == "n":
-        break
-
-
-for i in range(len(ticketList)):
-    print(ticketList[i].getStatus())
-
+    print("Submit Ticket           submit")
+    print("Respond to a Ticket     respond")
+    print("Open a closed Ticket    open")
+    print("View ticket info        view")
+    print("Print analytics         analytics")
+    selector = input("What do you want to do? ")
+    try:
+        allPaths(selector)
 
 
