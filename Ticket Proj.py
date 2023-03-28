@@ -67,6 +67,7 @@ class Ticket():
 ticketList = []
 
 def submitTicket():
+    print("-----SUBMITTING TICKETS-----")
     while 1 == 1:
         temp_object = Ticket(input("Input the Staff Id: "),
                             input("Input the Ticket Creator Name: "),
@@ -79,12 +80,14 @@ def submitTicket():
             break
 
 def viewTickets():
+    print("-----VIEWING TICKETS-----")
     for i in range(len(ticketList)):
         print(ticketList[i].getStatus())
         input("Input anything to continue")
 
 
 def addFeedback():
+    print("-----ADDING FEEDBACK-----")
     inputId = input("What was the ID of the ticket")
     inputId = int(inputId)
     newFeedback = input("Input an update to the ticket: ")
@@ -93,26 +96,36 @@ def addFeedback():
         ticketList[inputId].solved = True
 
 def openTicket():
+    print("-----OPEN CLOSED TICKET-----")
     inputId = input("What was the ID of the ticket")
     inputId = int(inputId)
     ticketList[inputId].solved = False
     Ticket.open_tickets += 1
     Ticket.closed_tickets -= 1
 
-allPaths = {"submit" : submitTicket(),
-            "respond" : addFeedback(),
-            "open" : openTicket(),
+allPaths = {"submit" : submitTicket,
+            "respond" : addFeedback,
+            "open" : openTicket,
             "view" : viewTickets,
-            "analytics" : Ticket.displayTicketStats()}
+            "analytics" : Ticket.displayTicketStats}
+
+print("----------TICKETING SYSTEM------------")
+print("ALL PATHS")
+print("Submit Ticket          | submit")
+print("Respond to a Ticket    | respond")
+print("Open a closed Ticket   | open")
+print("View ticket info       | view")
+print("Print analytics        | analytics")
 
 while 1 == 1:
-    print("Submit Ticket           submit")
-    print("Respond to a Ticket     respond")
-    print("Open a closed Ticket    open")
-    print("View ticket info        view")
-    print("Print analytics         analytics")
+
     selector = input("What do you want to do? ")
     try:
-        allPaths(selector)
+        doPath = allPaths[selector]
+    except:
+        print("The input: ",selector," Is not valid")
+    else:
+        doPath()
+
 
 
