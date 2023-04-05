@@ -36,7 +36,7 @@ class Ticket:
         self.desc = desc
         self.desc = self.desc.lower()
 
-        self.solved = False
+        self.status = "Not Solved"
         self.password = ""
 
         self.feedback = "No Response Yet"
@@ -49,7 +49,7 @@ class Ticket:
         ):
             Ticket.open_tickets -= 1
             Ticket.closed_tickets += 1
-            self.solved = True
+            self.status = "Solved"
             self.password = self.staff_id[:3] + self.ticket_creator_name[:3]
             self.feedback = "Password Changed to: " + self.password
 
@@ -61,8 +61,9 @@ class Ticket:
         print("Email Address:   ", self.contact_email)
         print("Description:     ", self.desc)
         print("Response:        ", self.feedback)
-        print("Ticket Solved:   ", self.solved)
+        print("Ticket Solved:   ", self.status)
         print("-----------------------")
+
 
 
 ticketList = [] #keeps all the tickets, object type = Ticket
@@ -106,6 +107,26 @@ def submitTicket():
             break
 
 
+def getTicket():
+    while 1 == 1:
+        i = 0
+        listSize = len(ticketList)
+        foundId = False
+        inputId = input("What was the ID of the ticket: ")
+        while i < listSize:
+            if ticketList[i].ticket_number == int(inputId):
+                foundId = True
+                listSize = 0  # gets out of for loop
+            else:
+                i += 1
+
+        if foundId == False:
+            print("The Ticket ID: ", inputId, " Does not Exist")
+        else:
+            return i
+
+
+
 def viewTickets():
     print("-----VIEWING TICKETS-----")
     for i in range(len(ticketList)):
@@ -115,37 +136,21 @@ def viewTickets():
 
 def addFeedback():
     print("-----ADDING FEEDBACK-----")
-    while 1 == 1:
-        try:
-            inputId = input("What was the ID of the ticket: ")
-            inputId = int(inputId)
-            newFeedback = input("Input an update to the ticket: ")
-            ticketList[inputId - 2001].feedback = newFeedback
-        except:
-            print("The Ticket ID ", inputId, " Does not Exist")
-        else:
-            if input("Would you like to close this ticket? y for yes: ") == "y":
-                print("TICKET SOLVED!!!!!")
-                ticketList[inputId-2001].solved = True
-                break
-
-
+    index = getTicket()
+    newFeedback = input("Input an update to the ticket: ")
+    ticketList[index].feedback = newFeedback
+    if input("Would you like to close this ticket? y for yes: ") == "y":
+        print("TICKET SOLVED!!!!!")
+        ticketList[index].solved = "Solved"
 
 
 def openTicket():
     print("-----OPEN CLOSED TICKET-----")
-    while 1 == 1:
-        try:
-            inputId = input("What was the ID of the ticket: ")
-            inputId = int(inputId)
-            ticketList[inputId - 2001].solved = False
-        except:
-            print("The Ticket ID: ", inputId, " Does not Exist")
-        else:
-            Ticket.open_tickets += 1
-            Ticket.closed_tickets -= 1
-            print("Ticket reopened")
-            break
+    index = getTicket()
+    Ticket.open_tickets += 1
+    Ticket.closed_tickets -= 1
+    ticketList[index].status = "Reopened"
+    print("Ticket reopened")
 
 
 def main():
