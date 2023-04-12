@@ -1,0 +1,5 @@
+   
+To submit a ticket, type in submit
+To open a closed ticket, type in reopen
+To view ticket info, type in view
+To view analytics, type in analytics
