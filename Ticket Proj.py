@@ -70,7 +70,7 @@ ticketList = [] #keeps all the tickets, object type = Ticket
 
 def submitTicket():
     print("-----SUBMITTING TICKETS-----")
-    x = True #python exits all loops when you use break, I needed a loop breaker variable
+    x = True #I discovered that python exits all loops when you use break, I needed a loop breaker variable
     while 1 == 1:
         while x == True:
             inputStaff = input("Input the Staff Id: ")
