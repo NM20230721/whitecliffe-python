@@ -4,7 +4,8 @@ Originally I just erased my code after I was finished with practicing with it in
 I have had some minimal basic experience with coding before (Java) so I knew the basic concepts.
 Most of my time was spent on coding the Ticket Project. 
 
-(PRACTICING CONCEPTS)
+C
+ODING CONCETPS
 
 I practiced using functions at first. 
 Most of the practice with functions revolved around using for loops and user input.
@@ -22,3 +23,29 @@ I used it in this code
 I just looped through the given string and used the .get() function.
 I also used Dictionaries for my function selection/directory in the ticketing system project.
 
+Classes was another concept that I had to practice.
+Ive learn't them before but I wasn't too confident.
+I created some files where I just practiced making objects using classes.
+Inheritance was easy to learn but coding it was mind-boggling.
+
+Lastly I learnt about files. Opening files and closing files. I had a bit of troubles using variable names to open files instead of the actual file name. But that was just a naming error that I did.
+
+
+PRINCIPALS AND ETC.
+
+A design principal that I used quite alot was the agile methodology. I also used sprints for that.
+I found sprints useful as I was able to break up a programme into separate chunks that does different things.
+I found it easier to think like that.
+
+For naming, I tended to use camelCase a lot. I was just used to that and I also found it easier to read.
+I also used camelCase for my functions.
+However for some cases, I did use other types of naming conventions.
+For classes, the class name had a capital at the start.
+
+
+I knew that some programmes will have a plethora of functions. It gets a bit overwhelming trying to make the code as simple as it can. However I did try to incorporate trying to make my code as simple as it can (KISS)
+I mainly did this by planning my code little by little and grouping similar features together during my planning phase.
+
+I found functions to be very useful as I didn't have to repeat my code.
+There was a case in my ticketing project where I 4 different functions that all did the same thing at the start (get the ticket ID)
+I then decided to simply take that bit and turn it into its own function. This way a function calls a function.
